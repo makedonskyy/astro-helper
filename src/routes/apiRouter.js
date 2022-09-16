@@ -1,5 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+import axios from 'axios';
 import { User, Zodiac } from '../db/models';
 
 const router = express.Router();
@@ -14,9 +15,11 @@ router.get('/about', async (req, res) => {
 });
 
 router.get('/about/sign/:id', async (req, res) => {
+  console.log('We are in Handler');
   try {
     const { id } = req.params;
-    const oneSign = Zodiac.findOne({ where: { id } });
+    const oneSign = await Zodiac.findByPk(id);
+
     res.json(oneSign);
   } catch (error) {
     console.error(error);
@@ -51,6 +54,25 @@ router.post('/login', async (req, res) => {
     } else {
       res.sendStatus(401);
     }
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
+router.post('/mypredictions', async (req, res) => {
+  try {
+    const { sign, day } = req.body;
+    const options = {
+      method: 'POST',
+      url: 'https://sameer-kumar-aztro-v1.p.rapidapi.com/',
+      params: { sign, day },
+      headers: {
+        'X-RapidAPI-Key': '91f366fe2dmsh222ff350d50ebf8p1a5868jsnf71042f07107',
+        'X-RapidAPI-Host': 'sameer-kumar-aztro-v1.p.rapidapi.com',
+      },
+    };
+    const currPred = await axios.request(options);
+    res.json(currPred.data);
   } catch (error) {
     console.log(error.message);
   }
