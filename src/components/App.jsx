@@ -7,6 +7,7 @@ import Main from './pages/Main';
 import AllZodias from './pages/AllZodias';
 import OneSign from './pages/OneSign';
 import MyPredictions from './pages/MyPredictions';
+import MyPredictionsCopy from './pages/MyPredictionsCopy';
 
 export default function App({ userId, zodiac, oneSign }) {
   const [user, setUser] = useState(userId || null);
@@ -21,7 +22,8 @@ export default function App({ userId, zodiac, oneSign }) {
         <Route path="/login" element={<LogIn user={user} setUser={setUser} />} />
         <Route path="/about" element={<AllZodias user={user} setUser={setUser} zodiac={zodiac} />} />
         <Route path="/about/sign/:id" element={<OneSign user={user} setUser={setUser} oneSign={oneSign} />} />
-        <Route path="/mypredictions" element={<MyPredictions />} />
+        <Route path="/mypredictions" element={<MyPredictions user={user} setUser={setUser} />} />
+        {/* <Route path="/mypredictions" element={<MyPredictionsCopy user={user} setUser={setUser} />} /> */}
       </Routes>
     </div>
   );

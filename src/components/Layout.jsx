@@ -22,7 +22,7 @@ export default function Layout({ initState }) {
         <title>Astrohelper</title>
       </head>
       <body>
-        <div id="root">
+        <div id="root" style={{ backgroundColor: 'black' }}>
           <StaticRouter location={initState.path}>
             <App {...initState} />
           </StaticRouter>

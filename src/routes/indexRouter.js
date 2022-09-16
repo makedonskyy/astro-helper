@@ -50,4 +50,12 @@ route.get('/mypredictions', async (req, res) => {
   }
 });
 
+route.get('/mypredictionscopy', async (req, res) => {
+  try {
+    res.render('Layout');
+  } catch (err) {
+    console.error('Ошибка добавления', err);
+  }
+});
+
 export default route;

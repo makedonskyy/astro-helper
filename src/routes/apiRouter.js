@@ -78,6 +78,25 @@ router.post('/mypredictions', async (req, res) => {
   }
 });
 
+// router.post('/mypredictionscopy', async (req, res) => {
+//   try {
+//     const { sign, day } = req.body;
+//     const options = {
+//       method: 'POST',
+//       url: 'https://sameer-kumar-aztro-v1.p.rapidapi.com/',
+//       params: { sign, day },
+//       headers: {
+//         'X-RapidAPI-Key': '91f366fe2dmsh222ff350d50ebf8p1a5868jsnf71042f07107',
+//         'X-RapidAPI-Host': 'sameer-kumar-aztro-v1.p.rapidapi.com',
+//       },
+//     };
+//     const currPred = await axios.request(options);
+//     res.json(currPred.data);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// });
+
 router.get('/logout', (req, res) => {
   try {
     req.session.destroy();

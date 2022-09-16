@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function MyPredictions({ user, setUser }) {
+export default function mypredictionsCopy({ user, setUser }) {
   const [predictions, setPredictions] = useState('');
+  const [translate, setTranslate] = useState('');
   const [input, setInput] = useState({
     sign: '',
     day: '',
@@ -13,7 +14,7 @@ export default function MyPredictions({ user, setUser }) {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/v1/mypredictions', {
+    const response = await fetch('/api/v1/mypredictionscopy', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -23,6 +24,22 @@ export default function MyPredictions({ user, setUser }) {
       .then((res) => res.json())
       .then((data) => setPredictions(data.description));
   };
+  console.log(predictions);
+  useEffect(() => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'X-RapidAPI-Key': '91f366fe2dmsh222ff350d50ebf8p1a5868jsnf71042f07107',
+        'X-RapidAPI-Host': 'deepl-translator.p.rapidapi.com'
+      },
+      body: `{"text": ${predictions},"source":"en","target":"ru"}`,
+    };
+    fetch('https://deepl-translator.p.rapidapi.com/translate/', options)
+      .then((response) => response.json())
+      .then((response) => console.log(response.text))
+      .catch((err) => console.error(err));
+  }, [submitHandler]);
   return (
     <form onSubmit={submitHandler}>
       <div className="input-group">
@@ -48,13 +65,9 @@ export default function MyPredictions({ user, setUser }) {
           <option value="Pisces">Рыбы</option>
         </select>
       </div>
-      <button className="btn btn-outline-light" type="submit">get</button>
-      <h3 style={{ color: 'whitesmoke' }}>Ваше предсказание:</h3>
-      <p style={{ color: 'whitesmoke' }}>{predictions}</p>
-      <div style={{
-        backgroundImage: 'url(' + 'https://otkritkis.com/wp-content/uploads/2022/07/guxcq.gif' + ')', height: '720px', width: '1000px', textAlign: 'center',
-      }}
-      />
+      <button className="btn btn-success" type="submit">get</button>
+      <h3>Ваше предсказание:</h3>
+      <p>{translate}</p>
     </form>
   );
 }

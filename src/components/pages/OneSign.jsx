@@ -18,20 +18,20 @@ export default function OneSign({ oneSign, user, setUser }) {
       <>
         <div className="row">
           <div className="col-2">
-            <h2>{sign?.name}</h2>
+            <h2 style={{ color: 'whitesmoke' }}>{sign?.name}</h2>
           </div>
         </div>
-        <h3>Основные черты знака</h3>
+        <h3 style={{ color: 'whitesmoke' }}>Основные черты знака</h3>
         <div className="row">
-          <p>{sign?.description}</p>
+          <p style={{ color: 'whitesmoke' }}>{sign?.description}</p>
         </div>
-        <h3>Плюсы</h3>
+        <h3 style={{ color: 'whitesmoke', textDecorationLine: 'underline overline', textDecorationColor: 'whitesmoke' }}>Плюсы</h3>
         <div className="row">
-          <h2>{sign?.plus}</h2>
+          <h2 style={{ color: 'whitesmoke' }}>{sign?.plus}</h2>
         </div>
-        <h3>Минусы</h3>
+        <h3 style={{ color: 'whitesmoke', textDecorationLine: 'underline overline', textDecorationColor: 'whitesmoke' }}>Минусы</h3>
         <div className="row">
-          <h2>{sign?.plus}</h2>
+          <h2 style={{ color: 'whitesmoke' }}>{sign?.plus}</h2>
         </div>
       </>
       )}
