@@ -1,13 +1,23 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import { User } from '../db/models';
+import { User, Zodiac } from '../db/models';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/about', async (req, res) => {
   try {
-    // const allNumbers = await Number.findAll({ order: [['company', 'ASC']], include: User });
-    // res.json(allNumbers);
+    const allSign = await Zodiac.findAll();
+    res.json(allSign);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.get('/about/sign/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const oneSign = Zodiac.findOne({ where: { id } });
+    res.json(oneSign);
   } catch (error) {
     console.error(error);
   }
@@ -37,7 +47,6 @@ router.post('/login', async (req, res) => {
     const compare = await bcrypt.compare(password, currUser.password);
     if (compare) {
       req.session.userId = currUser.id;
-      req.session.userEmail = currUser.email;
       res.json({ id: currUser.id });
     } else {
       res.sendStatus(401);

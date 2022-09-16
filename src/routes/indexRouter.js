@@ -26,20 +26,28 @@ route.get('/signup', async (req, res) => {
   }
 });
 
-// route.get('/mynumbers', async (req, res) => {
-//   try {
-//     res.render('Layout');
-//   } catch (err) {
-//     console.error('Ошибка списка номеров', err);
-//   }
-// });
+route.get('/about', async (req, res) => {
+  try {
+    res.render('Layout');
+  } catch (err) {
+    console.error('Ошибка списка знаков', err);
+  }
+});
 
-// route.get('/newnumber', async (req, res) => {
-//   try {
-//     res.render('Layout');
-//   } catch (err) {
-//     console.error('Ошибка добавления', err);
-//   }
-// });
+route.get('/about/sign/:id', async (req, res) => {
+  try {
+    res.render('Layout');
+  } catch (err) {
+    console.error('Ошибка знака', err);
+  }
+});
+
+route.get('/mypredictions', async (req, res) => {
+  try {
+    res.render('Layout');
+  } catch (err) {
+    console.error('Ошибка добавления', err);
+  }
+});
 
 export default route;

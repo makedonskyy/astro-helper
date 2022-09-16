@@ -6,6 +6,7 @@ import store from 'session-file-store';
 import jsxRender from './components/utils/jsxRender';
 import indexRouter from './routes/indexRouter';
 import apiRouter from './routes/apiRouter';
+import { Zodiac } from './db/models';
 
 const PORT = 3000;
 const app = express();
@@ -35,10 +36,11 @@ app.use(express.json());
 
 app.use(async (req, res, next) => {
   res.locals.path = req.originalUrl;
+  const zodiac = await Zodiac.findAll()
+  res.locals.zodiac = zodiac;
   // const allNumbers = await Number.findAll({ order: [['company', 'ASC']], include: User });
   // res.locals.allNumbers = allNumbers;
-  // res.locals.userId = req.session?.userId;
-  // res.locals.userEmail = req.session?.userEmail;
+  res.locals.userId = req.session?.userId;
   // if (req.session?.userId) {
   //   const myNum = await Number.findAll({
   //     where: { user_id: res.locals.userId },
