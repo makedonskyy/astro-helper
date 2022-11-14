@@ -1,1 +1,1 @@
-# trip-helper
+# astro-helper
